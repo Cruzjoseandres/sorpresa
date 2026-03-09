@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const starsContainer = document.getElementById("stars-container");
-    const numStars = 150;
+
+    // Reduce star count significantly on mobile to prevent extreme lag and battery drain
+    const isMobile = window.innerWidth < 768;
+    const numStars = isMobile ? 40 : 120;
 
     // Create ambient stars / floating fireflies
     for (let i = 0; i < numStars; i++) {
@@ -14,12 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let duration = Math.random() * 6 + 4; // 4 to 10s
         let delay = Math.random() * 5;
 
-        // Ensure rendering on GPU with translate3d initially
-        star.style.transform = `translate3d(${x}vw, ${y}vh, 0)`;
-        // Using fixed positioning and transform vs top/left is faster
-        star.style.position = "absolute";
-        star.style.top = "0";
-        star.style.left = "0";
+        // Position
+        star.style.left = `${x}vw`;
+        star.style.top = `${y}vh`;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.animationDuration = `${duration}s`;
@@ -42,10 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Also add some random floating petals periodically
-    // Using requestAnimationFrame to only add DOM elements during frame periods
+    // Give mobile more time between petal generation to prevent overlap frame drops
+    const petalInterval = isMobile ? 4000 : 2000;
+
     let lastTime = 0;
     function dropPetalsLoop(timestamp) {
-        if (timestamp - lastTime > 2000) {
+        if (timestamp - lastTime > petalInterval) {
             createFallingPetal();
             lastTime = timestamp;
         }
@@ -61,10 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let size = Math.random() * 10 + 5;
 
         petal.style.position = "absolute";
-        petal.style.top = "0";
-        petal.style.left = "0";
-        // Starting position with GPU transform
-        petal.style.transform = `translate3d(${x}vw, -20px, 0)`;
+        petal.style.top = "-20px";
+        petal.style.left = `${x}vw`;
         petal.style.width = `${size}px`;
         petal.style.height = `${size}px`;
         petal.style.borderRadius = "50% 0 50% 0";
@@ -72,13 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
         petal.style.boxShadow = "0 0 10px #ff1493";
         petal.style.opacity = "0.7";
 
-        // hardware-accelerated transition
-        petal.style.transition = "transform 8s linear";
+        // Use translate property for modern, smooth animation without overriding scale/rotate
+        petal.style.transition = "translate 8s linear";
         starsContainer.appendChild(petal);
 
         // Force reflow and start animation
         requestAnimationFrame(() => {
-            petal.style.transform = `translate3d(${x}vw, 110vh, 0) rotate(${Math.random() * 720}deg)`;
+            petal.style.translate = `0 110vh`;
         });
 
         setTimeout(() => {
@@ -90,15 +90,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to create burst effect on flower click
     function createBurst(startX, startY) {
-        for (let i = 0; i < 20; i++) {
+        // Less particles on mobile for performance
+        const maxParticles = isMobile ? 8 : 20;
+
+        for (let i = 0; i < maxParticles; i++) {
             let particle = document.createElement("div");
             particle.classList.add("star");
             particle.style.position = "fixed";
             particle.style.top = "0";
             particle.style.left = "0";
 
-            // Start at origin
-            particle.style.transform = `translate3d(${startX}px, ${startY}px, 0)`;
+            // Start at origin via translate
+            particle.style.translate = `${startX}px ${startY}px`;
 
             let size = Math.random() * 6 + 2;
             particle.style.width = `${size}px`;
@@ -111,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let angle = Math.random() * Math.PI * 2;
             let velocity = Math.random() * 150 + 50;
-            // destination coordinates relative to start position (calculated entirely using translate3d)
             let moveX = startX + (Math.cos(angle) * velocity);
             let moveY = startY + (Math.sin(angle) * velocity);
 
@@ -119,7 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
             starsContainer.appendChild(particle);
 
             requestAnimationFrame(() => {
-                particle.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) scale(0)`;
+                particle.style.translate = `${moveX}px ${moveY}px`;
+                particle.style.scale = 0;
                 particle.style.opacity = "0";
             });
 

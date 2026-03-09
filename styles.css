@@ -18,24 +18,21 @@ body {
 
 /* Typography & Glowing Text */
 .content {
-    margin-top: 15vh;
+    margin-top: 10vh;
     text-align: center;
     z-index: 10;
     padding: 0 20px;
     animation: fadeIn 3s ease-in-out;
-    will-change: opacity, transform;
-    transform: translateZ(0);
 }
 
 .glow-text {
     font-family: 'Great Vibes', cursive;
     font-size: 5rem;
+    line-height: 1.2;
     color: #ff9ed2;
     text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff00ff;
     margin-bottom: 15px;
     animation: pulse 2.5s infinite alternate;
-    will-change: text-shadow, transform;
-    transform: translateZ(0);
 }
 
 .subtitle {
@@ -46,8 +43,6 @@ body {
     text-transform: uppercase;
     text-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
     animation: fadeIn 5s ease-in-out;
-    will-change: opacity, transform;
-    transform: translateZ(0);
 }
 
 /* Garden & Tulips Setup */
@@ -61,7 +56,6 @@ body {
     gap: 30px;
     padding-bottom: 30px;
     z-index: 5;
-    transform: translateZ(0);
 }
 
 .tulip {
@@ -70,20 +64,19 @@ body {
     flex-direction: column;
     align-items: center;
     transform-origin: bottom;
+    /* Independent CSS property for rotation avoids overwriting the scale property! */
     animation: sway 5s infinite ease-in-out alternate;
-    will-change: transform;
-    transform: translateZ(0);
 }
 
-/* Organic Variations */
+/* Organic Variations - Using 'scale:' instead of 'transform:' directly prevents keyframe collisions */
 .t1 {
-    transform: scale(0.85) translateZ(0);
+    scale: 0.85;
     animation-duration: 4.5s;
     animation-delay: 0.2s;
 }
 
 .t2 {
-    transform: scale(1.1) translateZ(0);
+    scale: 1.1;
     animation-duration: 5s;
     animation-delay: 0.5s;
     z-index: 2;
@@ -91,7 +84,7 @@ body {
 }
 
 .t3 {
-    transform: scale(1) translateZ(0);
+    scale: 1;
     animation-duration: 4s;
     animation-delay: 0.1s;
     z-index: 1;
@@ -99,7 +92,7 @@ body {
 }
 
 .t4 {
-    transform: scale(0.95) translateZ(0);
+    scale: 0.95;
     animation-duration: 5.5s;
     animation-delay: 0.8s;
     z-index: 3;
@@ -107,7 +100,7 @@ body {
 }
 
 .t5 {
-    transform: scale(0.8) translateZ(0);
+    scale: 0.8;
     animation-duration: 4.8s;
     animation-delay: 0.4s;
 }
@@ -118,14 +111,13 @@ body {
     width: 70px;
     height: 90px;
     z-index: 10;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: scale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), rotate 0.4s;
     cursor: pointer;
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 .flower:hover {
-    transform: scale(1.15) rotate(3deg) translateZ(0);
+    scale: 1.15;
+    rotate: 3deg;
 }
 
 /* Petals */
@@ -148,13 +140,13 @@ body {
 
 .petal-left {
     left: 0;
-    transform: rotate(-15deg);
+    rotate: -15deg;
     border-radius: 70% 30% 10% 20%;
 }
 
 .petal-right {
     right: 0;
-    transform: rotate(15deg);
+    rotate: 15deg;
     border-radius: 30% 70% 20% 10%;
     background: linear-gradient(to top left, #e84393, #ff4757);
 }
@@ -170,7 +162,6 @@ body {
 }
 
 /* Tulip Colors Variations */
-/* Tulip 2: Pink / Purple */
 .t2 .petal {
     box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
 }
@@ -187,7 +178,6 @@ body {
     background: linear-gradient(to top, #f368e0, #ff9ff3);
 }
 
-/* Tulip 4: Deep Red / Crimson */
 .t4 .petal {
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
 }
@@ -229,13 +219,13 @@ body {
 
 .leaf-left {
     left: -18px;
-    transform: rotate(-35deg);
+    rotate: -35deg;
     border-radius: 100% 0 100% 0;
 }
 
 .leaf-right {
     right: -18px;
-    transform: rotate(35deg);
+    rotate: 35deg;
     border-radius: 0 100% 0 100%;
 }
 
@@ -249,7 +239,6 @@ body {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
-    transform: translateZ(0);
 }
 
 .star {
@@ -258,59 +247,60 @@ body {
     border-radius: 50%;
     opacity: 0;
     animation: twinkle linear infinite;
-    will-change: transform, opacity;
-    transform: translateZ(0);
 }
 
-/* Keyframes */
+/* Keyframes - strictly using independent properties to avoid overwriting each other */
 @keyframes sway {
     0% {
-        transform: rotate(-4deg) translateZ(0);
+        rotate: -4deg;
     }
 
     100% {
-        transform: rotate(4deg) translateZ(0);
+        rotate: 4deg;
     }
 }
 
 @keyframes pulse {
     0% {
         text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff00ff;
-        transform: scale(1) translateZ(0);
+        scale: 1;
     }
 
     100% {
         text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493, 0 0 50px #ff00ff, 0 0 70px #ff1493;
-        transform: scale(1.02) translateZ(0);
+        scale: 1.02;
     }
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-30px) translateZ(0);
+        translate: 0 -30px;
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) translateZ(0);
+        translate: 0 0;
     }
 }
 
 @keyframes twinkle {
     0% {
         opacity: 0;
-        transform: translateY(0) scale(0.5) translateZ(0);
+        translate: 0 0;
+        scale: 0.5;
     }
 
     50% {
         opacity: 1;
-        transform: translateY(-30px) scale(1.2) translateZ(0);
+        translate: 0 -30px;
+        scale: 1.2;
     }
 
     100% {
         opacity: 0;
-        transform: translateY(-60px) scale(0.5) translateZ(0);
+        translate: 0 -60px;
+        scale: 0.5;
     }
 }
 
@@ -324,27 +314,6 @@ body {
         font-size: 1.1rem;
     }
 
-    /* We need to re-declare the individual transform variations for mobile instead of a blanket override to prevent translation breakages */
-    .t1 {
-        transform: scale(0.65) translateZ(0);
-    }
-
-    .t2 {
-        transform: scale(0.8) translateZ(0);
-    }
-
-    .t3 {
-        transform: scale(0.7) translateZ(0);
-    }
-
-    .t4 {
-        transform: scale(0.65) translateZ(0);
-    }
-
-    .t5 {
-        transform: scale(0.6) translateZ(0);
-    }
-
     .garden {
         gap: 15px;
     }
@@ -352,28 +321,41 @@ body {
 
 @media (max-width: 480px) {
     .content {
-        margin-top: 10vh;
+        margin-top: 5vh;
     }
 
     .glow-text {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        padding-top: 20px;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
     }
 
     .garden {
-        gap: 5px;
+        gap: 10px;
     }
 
-    /* Re-declare smaller scales instead of blanket rules to preserve individual tulip variations and avoid overriding hover */
+    /* Keep all variations intact, just make smaller individually using the scale property */
+    .t1 {
+        scale: 0.55;
+    }
+
     .t2 {
-        transform: scale(0.65) translateZ(0);
+        scale: 0.65;
     }
 
     .t3 {
-        transform: scale(0.6) translateZ(0);
+        scale: 0.6;
     }
 
     .t4 {
-        transform: scale(0.65) translateZ(0);
+        scale: 0.65;
+    }
+
+    .t5 {
+        scale: 0.55;
     }
 
     .t1,
