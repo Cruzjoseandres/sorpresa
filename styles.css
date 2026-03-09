@@ -324,8 +324,25 @@ body {
         font-size: 1.1rem;
     }
 
-    .tulip {
-        transform: scale(0.65) translateZ(0) !important;
+    /* We need to re-declare the individual transform variations for mobile instead of a blanket override to prevent translation breakages */
+    .t1 {
+        transform: scale(0.65) translateZ(0);
+    }
+
+    .t2 {
+        transform: scale(0.8) translateZ(0);
+    }
+
+    .t3 {
+        transform: scale(0.7) translateZ(0);
+    }
+
+    .t4 {
+        transform: scale(0.65) translateZ(0);
+    }
+
+    .t5 {
+        transform: scale(0.6) translateZ(0);
     }
 
     .garden {
@@ -339,15 +356,24 @@ body {
     }
 
     .glow-text {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
     }
 
     .garden {
-        gap: -5px;
+        gap: 5px;
     }
 
-    .tulip {
-        transform: scale(0.55) translateZ(0) !important;
+    /* Re-declare smaller scales instead of blanket rules to preserve individual tulip variations and avoid overriding hover */
+    .t2 {
+        transform: scale(0.65) translateZ(0);
+    }
+
+    .t3 {
+        transform: scale(0.6) translateZ(0);
+    }
+
+    .t4 {
+        transform: scale(0.65) translateZ(0);
     }
 
     .t1,
