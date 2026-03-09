@@ -23,6 +23,8 @@ body {
     z-index: 10;
     padding: 0 20px;
     animation: fadeIn 3s ease-in-out;
+    will-change: opacity, transform;
+    transform: translateZ(0);
 }
 
 .glow-text {
@@ -32,6 +34,8 @@ body {
     text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff00ff;
     margin-bottom: 15px;
     animation: pulse 2.5s infinite alternate;
+    will-change: text-shadow, transform;
+    transform: translateZ(0);
 }
 
 .subtitle {
@@ -42,6 +46,8 @@ body {
     text-transform: uppercase;
     text-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
     animation: fadeIn 5s ease-in-out;
+    will-change: opacity, transform;
+    transform: translateZ(0);
 }
 
 /* Garden & Tulips Setup */
@@ -55,6 +61,7 @@ body {
     gap: 30px;
     padding-bottom: 30px;
     z-index: 5;
+    transform: translateZ(0);
 }
 
 .tulip {
@@ -64,14 +71,46 @@ body {
     align-items: center;
     transform-origin: bottom;
     animation: sway 5s infinite ease-in-out alternate;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* Organic Variations */
-.t1 { transform: scale(0.85); animation-duration: 4.5s; animation-delay: 0.2s; }
-.t2 { transform: scale(1.1); animation-duration: 5s; animation-delay: 0.5s; z-index: 2; margin-bottom: 25px; }
-.t3 { transform: scale(1); animation-duration: 4s; animation-delay: 0.1s; z-index: 1; margin-bottom: 10px;}
-.t4 { transform: scale(0.95); animation-duration: 5.5s; animation-delay: 0.8s; z-index: 3; margin-bottom: 20px;}
-.t5 { transform: scale(0.8); animation-duration: 4.8s; animation-delay: 0.4s; }
+.t1 {
+    transform: scale(0.85) translateZ(0);
+    animation-duration: 4.5s;
+    animation-delay: 0.2s;
+}
+
+.t2 {
+    transform: scale(1.1) translateZ(0);
+    animation-duration: 5s;
+    animation-delay: 0.5s;
+    z-index: 2;
+    margin-bottom: 25px;
+}
+
+.t3 {
+    transform: scale(1) translateZ(0);
+    animation-duration: 4s;
+    animation-delay: 0.1s;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.t4 {
+    transform: scale(0.95) translateZ(0);
+    animation-duration: 5.5s;
+    animation-delay: 0.8s;
+    z-index: 3;
+    margin-bottom: 20px;
+}
+
+.t5 {
+    transform: scale(0.8) translateZ(0);
+    animation-duration: 4.8s;
+    animation-delay: 0.4s;
+}
 
 /* The Flower Head */
 .flower {
@@ -81,10 +120,12 @@ body {
     z-index: 10;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .flower:hover {
-    transform: scale(1.15) rotate(3deg);
+    transform: scale(1.15) rotate(3deg) translateZ(0);
 }
 
 /* Petals */
@@ -97,7 +138,8 @@ body {
 }
 
 /* Left and Right Petals */
-.petal-left, .petal-right {
+.petal-left,
+.petal-right {
     width: 45px;
     height: 85px;
     background: linear-gradient(to top right, #ff1493, #ff6b6b);
@@ -129,23 +171,45 @@ body {
 
 /* Tulip Colors Variations */
 /* Tulip 2: Pink / Purple */
-.t2 .petal { box-shadow: 0 0 25px rgba(255, 105, 180, 0.6); }
-.t2 .petal-left { background: linear-gradient(to top right, #d63031, #fd79a8); }
-.t2 .petal-right { background: linear-gradient(to top left, #e17055, #fab1a0); }
-.t2 .petal-center { background: linear-gradient(to top, #f368e0, #ff9ff3); }
+.t2 .petal {
+    box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
+}
+
+.t2 .petal-left {
+    background: linear-gradient(to top right, #d63031, #fd79a8);
+}
+
+.t2 .petal-right {
+    background: linear-gradient(to top left, #e17055, #fab1a0);
+}
+
+.t2 .petal-center {
+    background: linear-gradient(to top, #f368e0, #ff9ff3);
+}
 
 /* Tulip 4: Deep Red / Crimson */
-.t4 .petal { box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
-.t4 .petal-left { background: linear-gradient(to top right, #8b0000, #ff4d4d); }
-.t4 .petal-right { background: linear-gradient(to top left, #b30000, #ff6666); }
-.t4 .petal-center { background: linear-gradient(to top, #990000, #ff3333); }
+.t4 .petal {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+}
+
+.t4 .petal-left {
+    background: linear-gradient(to top right, #8b0000, #ff4d4d);
+}
+
+.t4 .petal-right {
+    background: linear-gradient(to top left, #b30000, #ff6666);
+}
+
+.t4 .petal-center {
+    background: linear-gradient(to top, #990000, #ff3333);
+}
 
 /* The Stem */
 .stem {
     width: 8px;
     height: 200px;
     background: linear-gradient(to right, #10ac84, #1dd1a1);
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
     border-radius: 4px;
     position: relative;
     top: -5px;
@@ -160,7 +224,7 @@ body {
     height: 100px;
     background: linear-gradient(135deg, #1dd1a1, #10ac84);
     z-index: 0;
-    box-shadow: inset 2px 2px 6px rgba(255,255,255,0.4);
+    box-shadow: inset 2px 2px 6px rgba(255, 255, 255, 0.4);
 }
 
 .leaf-left {
@@ -185,6 +249,7 @@ body {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;
+    transform: translateZ(0);
 }
 
 .star {
@@ -193,28 +258,60 @@ body {
     border-radius: 50%;
     opacity: 0;
     animation: twinkle linear infinite;
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 /* Keyframes */
 @keyframes sway {
-    0% { transform: rotate(-4deg); }
-    100% { transform: rotate(4deg); }
+    0% {
+        transform: rotate(-4deg) translateZ(0);
+    }
+
+    100% {
+        transform: rotate(4deg) translateZ(0);
+    }
 }
 
 @keyframes pulse {
-    0% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff00ff; transform: scale(1); }
-    100% { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493, 0 0 50px #ff00ff, 0 0 70px #ff1493; transform: scale(1.02); }
+    0% {
+        text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff00ff;
+        transform: scale(1) translateZ(0);
+    }
+
+    100% {
+        text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493, 0 0 50px #ff00ff, 0 0 70px #ff1493;
+        transform: scale(1.02) translateZ(0);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-30px) translateZ(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
 }
 
 @keyframes twinkle {
-    0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    50% { opacity: 1; transform: translateY(-30px) scale(1.2); }
-    100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5) translateZ(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-30px) scale(1.2) translateZ(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.5) translateZ(0);
+    }
 }
 
 /* Responsive */
@@ -222,12 +319,15 @@ body {
     .glow-text {
         font-size: 3.5rem;
     }
+
     .subtitle {
         font-size: 1.1rem;
     }
+
     .tulip {
-        transform: scale(0.65) !important;
+        transform: scale(0.65) translateZ(0) !important;
     }
+
     .garden {
         gap: 15px;
     }
@@ -237,16 +337,22 @@ body {
     .content {
         margin-top: 10vh;
     }
+
     .glow-text {
         font-size: 2.8rem;
     }
+
     .garden {
         gap: -5px;
     }
+
     .tulip {
-        transform: scale(0.55) !important;
+        transform: scale(0.55) translateZ(0) !important;
     }
-    .t1, .t5 {
-        display: none; /* Keep primarily 3 tulips on mobile to avoid overcrowding */
+
+    .t1,
+    .t5 {
+        display: none;
+        /* Keep primarily 3 tulips on mobile to avoid overcrowding */
     }
 }
